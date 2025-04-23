@@ -71,7 +71,35 @@ public class UserDAO {
            System.out.println("OPERATION FAILED: " + e.getMessage());
            return INTERNAL_ERROR;
        }
+       
 }
+   
+   public static userModel getUserByEmailAndPassword(String email) {
+       String sql = "SELECT * FROM user_cm where email = ?";
+       
+       try(PreparedStatement preparedStatement = ConnectionMYSQL.Connection().prepareStatement(sql)) {
+           preparedStatement.setString(1, email);
+           
+           
+           ResultSet row = preparedStatement.executeQuery();
+           
+           if(row.next()) {
+               userModel userFinded = new userModel(
+               row.getString("username"),
+               row.getString("email"),
+               row.getString("user_password")
+               );
+               
+               userFinded.setId_user(row.getInt("id_user"));
+               return userFinded; 
+           }
+           
+           return  null;
+           
+       } catch (Exception e) {
+           return  null;
+       }
+   }
     
    
 

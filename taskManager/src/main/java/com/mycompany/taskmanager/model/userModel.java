@@ -58,6 +58,10 @@ public class userModel {
         this.user_password = user_password;
     }
     
+    public String getInfo() {
+        return  this.id_user + ":" + this.username + ":" + this.email;
+    }
+    
     
   
     

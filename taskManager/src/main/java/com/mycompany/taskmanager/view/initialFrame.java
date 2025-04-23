@@ -6,6 +6,7 @@ package com.mycompany.taskmanager.view;
 
 import com.mycompany.taskmanager.controller.UserController;
 import javax.swing.JOptionPane;
+import com.mycompany.taskmanager.view.*;
 
 /**
  *
@@ -29,6 +30,7 @@ public class initialFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btnLogin = new javax.swing.JButton();
@@ -42,9 +44,9 @@ public class initialFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jPanel3.setBackground(new java.awt.Color(183, 183, 183));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnLogin.setBackground(new java.awt.Color(204, 255, 204));
@@ -129,39 +131,40 @@ public class initialFrame extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Welcome");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("TASK MANAGER");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(157, 157, 157)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(117, 117, 117)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(78, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(7, 7, 7)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,7 +208,15 @@ public class initialFrame extends javax.swing.JFrame {
         String email = this.emailField1.getText();
         char[] password = this.pwField.getPassword();
         
-        JOptionPane.showMessageDialog(this, UserController.createUSer(userName, email, password));
+        
+        JOptionPane.showMessageDialog(this, UserController.createUSer(userName, email, password)[0]);
+        String url = UserController.createUSer(userName, email, password)[1];
+        if(!url.equals("not")) {
+        this.dispose();
+        new Home(url).setVisible(true);    
+        }
+        
+        
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
@@ -214,7 +225,13 @@ public class initialFrame extends javax.swing.JFrame {
         String email = this.emailField1.getText();
         char[] password = this.pwField.getPassword();
 
-        JOptionPane.showMessageDialog(this, UserController.login(email, password));
+        JOptionPane.showMessageDialog(this, UserController.login(email, password)[0]);
+        String url = UserController.login(email, password)[1];
+          if(!url.equals("not")) {
+        this.dispose();
+        new Home(url).setVisible(true);    
+        }
+  
 
 
     }//GEN-LAST:event_btnLoginActionPerformed
@@ -259,6 +276,7 @@ public class initialFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
     private javax.swing.JTextField emailField1;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

@@ -12,7 +12,7 @@ import com.mycompany.taskmanager.model.userModel;
  */
 public class TaskManager {
     public static void main(String[] args) {
-        UserDAO.login(new userModel("vitoria", "vitoria@gmail.com", "123"));
+        CreateTables.createBOARD();
     }
 
 }
