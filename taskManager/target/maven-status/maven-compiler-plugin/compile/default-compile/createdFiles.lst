@@ -1,9 +1,12 @@
 com\mycompany\taskmanager\database\CreateTables.class
 com\mycompany\taskmanager\view\Home.class
 com\mycompany\taskmanager\view\Home$4.class
+com\mycompany\taskmanager\view\DashBoardFrame$3.class
 com\mycompany\taskmanager\dao\UserDAO.class
 com\mycompany\taskmanager\view\initialFrame$4.class
+com\mycompany\taskmanager\controller\TaskController.class
 com\mycompany\taskmanager\view\initialFrame.class
+com\mycompany\taskmanager\dao\TaskDAO.class
 com\mycompany\taskmanager\view\DashBoardFrame$2.class
 com\mycompany\taskmanager\view\Home$5.class
 com\mycompany\taskmanager\dao\BoardDAO.class
@@ -13,10 +16,12 @@ com\mycompany\taskmanager\controller\BoardController.class
 com\mycompany\taskmanager\view\Home$2.class
 com\mycompany\taskmanager\TaskManager.class
 com\mycompany\taskmanager\model\BoardModel.class
+com\mycompany\taskmanager\model\TaskModel.class
 com\mycompany\taskmanager\view\Home$3.class
 com\mycompany\taskmanager\view\initialFrame$1.class
 com\mycompany\taskmanager\database\ConnectionMYSQL.class
 com\mycompany\taskmanager\model\userModel.class
+com\mycompany\taskmanager\view\Home$6.class
 com\mycompany\taskmanager\controller\UserController.class
 com\mycompany\taskmanager\view\DashBoardFrame.class
 com\mycompany\taskmanager\view\initialFrame$5.class

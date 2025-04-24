@@ -12,7 +12,8 @@ import com.mycompany.taskmanager.model.userModel;
  */
 public class TaskManager {
     public static void main(String[] args) {
-        CreateTables.createBOARD();
+
+           CreateTables.createTask();
     }
 
 }

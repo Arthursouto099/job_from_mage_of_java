@@ -47,4 +47,25 @@ public class CreateTables {
             System.out.println(e.getMessage());
         }
     }
+    
+    
+    public static void createTask() {
+        String sql = "CREATE TABLE task ("
+                + "id_task INT PRIMARY KEY AUTO_INCREMENT,"
+                + "title_task VARCHAR(100) NOT NULL,"
+                + "description_task VARCHAR(100) NOT NULL,"
+                + "date VARCHAR(11) NOT NULL,"
+                + " status ENUM('pending', 'concluded') DEFAULT 'pending',"
+                + "id_board INT,"
+                + "FOREIGN KEY (id_board) references board(id_board)"
+                + ")";
+        
+         try (Statement statement = ConnectionMYSQL.Connection().createStatement()) {
+            System.out.println("TABELA CRIADA COM SUCESSO");
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+    }
 }
