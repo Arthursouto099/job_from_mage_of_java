@@ -83,7 +83,9 @@ public class BoardDAO {
                return SUCCESS_UPDATE_BOARD;
            }
            
+           System.out.println("OPERAÇÃO FALHOU");
            return FAILED_UPDATE_BOARD;
+          
            
            
        } catch (Exception e) {

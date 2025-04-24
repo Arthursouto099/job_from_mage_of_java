@@ -42,14 +42,27 @@ public class Home extends javax.swing.JFrame {
         System.out.println(row);
         if (row != -1) {
             String id = " " + model.getValueAt(row, 0);
+            System.out.println(id);
             String title = " " + model.getValueAt(row, 1);
             String description = " " + model.getValueAt(row, 2);
 
-            idLabel.setText(id);
-            titleLabel.setText(title);
-            descriptionF.setText(description);
+            idLabel.setText(id.toUpperCase());
+            titleLabel.setText(title.toUpperCase());
+            descriptionF.setText(description.toUpperCase());
+            
+              String titleOption = "Deseja importar as informações referente ao cartão: " + title + "  para os inputs de seleção?";
+            Object[] options = new Object[]{"YES", "NO"};
+
+            int response = JOptionPane.showOptionDialog(this, titleOption, "SELECIONAR INFORMAÇÔES", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, "YES");
+
+            if (response == JOptionPane.YES_OPTION) {
+               this.objectiveField.setText(title);
+               this.descriptionF.setText(description);
+            
+            
         }
 
+    }
     }
 
     /**
@@ -63,8 +76,6 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         boardList = new javax.swing.JTable();
@@ -89,31 +100,15 @@ public class Home extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jButton1.setText("jButton1");
-
-        jButton2.setText("jButton2");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton2)
-                .addContainerGap(7, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+            .addGap(0, 64, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         boardList.setModel(new javax.swing.table.DefaultTableModel(
@@ -257,7 +252,7 @@ public class Home extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 25, Short.MAX_VALUE))
         );
@@ -317,7 +312,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         String title = objectiveField.getText();
-        String description = descriptionF.getText();
+        String description = descriptionField.getText();
 
         if (!idLabel.getText().equals("NENHUM ITEM SELECIONADO")) {
             JOptionPane.showMessageDialog(this, BoardController.updateBoard(title, description, this.id_user,  Integer.parseInt(idLabel.getText().trim())));
@@ -329,7 +324,11 @@ public class Home extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if(!idLabel.getText().equals("NENHUM ITEM SELECIONADO")) {
             this.dispose();
-            new DashBoardFrame(idLabel.getText().trim()).setVisible(true);
+            String t = titleLabel.getText().trim();
+            String d = descriptionF.getText().trim();
+            System.out.println(t);
+            System.out.println(d);
+            new DashBoardFrame(idLabel.getText().trim(), t, d).setVisible(true);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -371,7 +370,7 @@ public class Home extends javax.swing.JFrame {
     public void updateList() {
         model.setRowCount(0);
         for (BoardModel b : BoardController.getAllBoardById(this.id_user)) {
-            model.addRow(new Object[]{b.getId_board(), b.getTitle_board(), b.getDescription_board()});
+            model.addRow(new Object[]{b.getId_board(), b.getTitle_board().toUpperCase(), b.getDescription_board().toUpperCase()});
         }
         this.boardList.setModel(model);
     }
@@ -382,8 +381,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextArea descriptionF;
     private javax.swing.JTextField descriptionField;
     private javax.swing.JLabel idLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -401,4 +398,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField objectiveField;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
+
 }

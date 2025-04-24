@@ -70,4 +70,62 @@ public class TaskDAO {
         return taskList;
     }
     
+ 
+    
+    
+    public static int editTask(TaskModel taskObject) {
+        String sql = "UPDATE task SET title_task = ?, description_task =?, date = ? WHERE id_task =?";
+        
+        try(PreparedStatement pstmt = ConnectionMYSQL.Connection().prepareStatement(sql)) {
+            pstmt.setString(1, taskObject.getTitle_task());
+            pstmt.setString(2, taskObject.getDescription_task());
+            pstmt.setString(3, taskObject.getDate());
+            pstmt.setInt(4, taskObject.getId_task());
+            
+            int rows = pstmt.executeUpdate();
+            
+            if (rows > 0) {
+                return SUCCESS_UPDATE_TASK ;
+            }
+            
+            return FAILED_UPDATE_TASK;
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return FAILED_UPDATE_TASK;
+        }
+    }
+    
+    
+    public static int completeTask(int Id_task) {
+        String sql = "UPDATE task SET status = 'concluded' WHERE id_task = ? ";
+        
+        try(PreparedStatement pstmt = ConnectionMYSQL.Connection().prepareStatement(sql)) {
+            pstmt.setInt(1, Id_task);
+            pstmt.executeUpdate();
+            return SUCCESS_UPDATE_TASK;
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return FAILED_UPDATE_TASK;
+        }
+        
+    }
+    
+    
+    public static  int deleteTask(int Id_task) {
+        String sql = "DELETE FROM task WHERE id_task = ?";
+              
+        
+        try(PreparedStatement pstmt = ConnectionMYSQL.Connection().prepareStatement(sql)) {
+            pstmt.setInt(1, Id_task);
+            pstmt.executeUpdate();
+            return SUCCESS_UPDATE_TASK;
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return FAILED_UPDATE_TASK;
+        }
+    }
+    
 }
